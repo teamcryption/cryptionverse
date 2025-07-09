@@ -13,12 +13,12 @@ export default function HomePage() {
         transition={{ duration: 1 }}
       >
         <Image
-          src="/cryption%20Verse%20logo.png"
-          alt="Cryption Verse Logo"
-          width={120}
-          height={120}
-          className="mb-6"
-        />
+      src="/cryption-verse-logo.png"
+      alt="Cryption Verse Logo"
+      width={120}
+      height={120}
+      className="mb-6"
+      />
       </motion.div>
 
       {/* Main Title */}
