@@ -38,7 +38,7 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.6 }}
       >
-        We're building something revolutionary at <span className="text-purple-400 font-semibold">Cryption Verse</span> — combining software, AI, and marketing innovation.
+        We&apos;re building something revolutionary at <span className="text-purple-400 font-semibold">Cryption Verse</span> — combining software, AI, and marketing innovation.
       </motion.p>
 
       {/* Animated Bar */}
