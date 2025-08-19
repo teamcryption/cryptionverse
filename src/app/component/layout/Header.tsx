@@ -35,33 +35,57 @@ const Header = () => {
       <div
         className={` mx-auto px-4 flex ${
           scrolled
-            ? " transition-all justify-evenly  ease-in-out bg-gray-700 rounded-full max-w-4xl"
-            : " transition-all justify-between  ease-in-out max-w-7xl"
-        } items-center `}
+            ? " transition-all justify-evenly align-center lg:py-2 sm:py-1  ease-in-out bg-gray-700 lg:rounded-full sm:rounded-20 lg:max-w-4xl"
+            : " transition-all justify-between  align-center ease-in-out max-w-7xl"
+        }  `}
       >
         {/* Logo */}
         <div
-          className={`text-2xl font-bold text-white space-x-2 transition-all ${
+          className={`text-2xl font-bold text-black space-x-2 transition-all ${
             scrolled ? "text-xl" : "text-2xl" // Reduce font size when scrolled
           }`}
         >
           <Link href="/">
-            <img src="/card.png" className="w-15 h-13" alt="Logo" />
+            {scrolled ? (
+              <img src="/dark-logo.png" className="w-15 h-13" alt="Logo" />
+            ) : (
+              <img src="/card.png" className="w-15 h-13" alt="Logo" />
+            )}
           </Link>
         </div>
 
         {/* Navigation Menu for Desktop */}
-        <nav className="hidden md:flex space-x-4">
-          <Link href="/" className="text-white hover:text-black font-serif">
+        <nav className="hidden md:flex space-x-4 pt-4 space-y-4">
+          <Link
+            href="/"
+            className={` ${
+              scrolled ? "text-white" : "text-black"
+            } hover:text-black font-serif font-bold`}
+          >
             Home
           </Link>
-          <Link href="/" className="text-white hover:text-black font-serif">
+          <Link
+            href="/"
+            className={` ${
+              scrolled ? "text-white" : "text-black"
+            } hover:text-black font-serif font-bold`}
+          >
             Products
           </Link>
-          <Link href="/" className="text-white hover:text-black font-serif">
+          <Link
+            href="/"
+            className={` ${
+              scrolled ? "text-white" : "text-black"
+            } hover:text-black font-serif font-bold`}
+          >
             About
           </Link>
-          <Link href="/" className="text-white hover:text-black font-serif">
+          <Link
+            href="/"
+            className={` ${
+              scrolled ? "text-white" : "text-black"
+            } hover:text-black font-serif font-bold`}
+          >
             Contact
           </Link>
         </nav>
@@ -72,17 +96,19 @@ const Header = () => {
         </div>
 
         {/* Mobile Hamburger Menu */}
-        <div className="md:hidden">
+        <div className="md:hidden mt-4">
           <button
             onClick={toggleMenu}
-            className="text-white focus:outline-none"
+            className={`${
+              scrolled ? "text-white" : "text-black"
+            }  focus:outline-none`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              className="w-6 h-6"
+              className="w-8 h-8"
             >
               <path
                 strokeLinecap="round"
@@ -99,16 +125,16 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg">
           <nav className="flex flex-col items-center space-y-4 py-4">
-            <Link href="/" className="text-white hover:text-blue-500">
+            <Link href="/" className="text-black hover:text-blue-500">
               Home
             </Link>
-            <Link href="/products" className="text-white hover:text-blue-500">
+            <Link href="/products" className="text-black hover:text-blue-500">
               Products
             </Link>
-            <Link href="/about" className="text-white hover:text-blue-500">
+            <Link href="/about" className="text-black hover:text-blue-500">
               About
             </Link>
-            <Link href="/contact" className="text-white hover:text-blue-500">
+            <Link href="/contact" className="text-black hover:text-blue-500">
               Contact
             </Link>
           </nav>

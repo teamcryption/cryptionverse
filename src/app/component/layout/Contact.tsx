@@ -91,6 +91,7 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("form", form);
     e.preventDefault();
     setStatus(null);
     const v = validate();
@@ -102,7 +103,7 @@ const Contact = () => {
       setSubmitting(true);
 
       const response = await axios.post(
-        "https://email-sender-zeta.vercel.app/auth/email",
+        "https://cryption-backend.vercel.app/auth/email",
         {
           fullName: form.firstName + form.lastName,
           email: form.email,
@@ -126,6 +127,7 @@ const Contact = () => {
         });
       }
     } catch (error) {
+      console.log(error);
       setStatus({ type: "error", message: "Something went wrong." });
     } finally {
       setSubmitting(false);
@@ -142,7 +144,7 @@ const Contact = () => {
             <div className="text-center max-w-3xl mx-auto">
               <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-5">
                 Get In{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">
+                <span className="bg-clip-text text-transparent bg-black">
                   Touch
                 </span>
               </h1>
@@ -272,7 +274,7 @@ const Contact = () => {
                         />
                       </div>
 
-                      <button className="mt-6 px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-full shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:from-blue-600 hover:to-purple-600 focus:outline-none">
+                      <button className="mt-6 px-8 py-3 bg-black text-white font-semibold rounded-full shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:from-blue-600 hover:to-purple-600 focus:outline-none">
                         {submitting ? "Sending..." : "Send Message"}
                       </button>
 
@@ -301,14 +303,14 @@ const Contact = () => {
                           key={idx}
                           className="flex items-start gap-4 rounded-xl border border-slate-200 p-4 hover:shadow-md transition-shadow"
                         >
-                          <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-500 text-white flex items-center justify-center shadow-sm">
+                          <div className="h-12 w-12 rounded-xl bg-black text-white flex items-center justify-center shadow-sm">
                             <Icon className="h-6 w-6" />
                           </div>
                           <div>
                             <h3 className="font-medium text-slate-900">
                               {info.title}
                             </h3>
-                            <p className="text-indigo-600 font-medium">
+                            <p className="text-gray-600 font-medium">
                               {info.content}
                             </p>
                             <p className="text-sm text-slate-600">
@@ -349,7 +351,7 @@ const Contact = () => {
             <div className="text-center mb-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-3">
                 Frequently Asked{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">
+                <span className="bg-clip-text text-transparent bg-black">
                   Questions
                 </span>
               </h2>

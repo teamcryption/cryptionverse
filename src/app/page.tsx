@@ -9,11 +9,11 @@ import Contact from "./component/layout/Contact";
 function page() {
   return (
     <div className="bg-white">
-      <div className=" bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500">
+      <div className=" bg-white">
         <Header />
         <Hero />
       </div>
-      <TrustedSection />
+      {/* <TrustedSection /> */}
       <Solutions />
       <Contact />
       <Footer />

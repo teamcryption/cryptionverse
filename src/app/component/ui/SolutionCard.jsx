@@ -9,22 +9,26 @@ import {
   Code,
   BarChart2,
   Box,
+  Bot,
+  SquareCode,
+  Smartphone,
+  ChartBarBig,
 } from "lucide-react"; // Import desired icons
 
-const SolutionCard = ({ title, index }) => {
+const SolutionCard = ({ item, index }) => {
   // Function to choose icons based on the title
-  const getIcon = (title) => {
-    switch (title) {
-      case "Mobile Banking Solutions":
-        return <CreditCard className="mx-auto mb-6 text-blue-600" />;
-      case "Remittance Solutions":
-        return <DollarSign className="mx-auto mb-6 text-blue-600" />;
-      case "Digital Wallet Solutions":
+  const getIcon = (icon) => {
+    switch (icon) {
+      case "AI Automation":
+        return <Bot className="mx-auto mb-6 text-blue-600" />;
+      case "Business Software":
+        return <SquareCode className="mx-auto mb-6 text-blue-600" />;
+      case "Web Development":
         return <Globe className="mx-auto mb-6 text-blue-600" />;
-      case "Payment Gateway Solutions":
-        return <Shield className="mx-auto mb-6 text-blue-600" />;
-      case "Currency Exchange Solutions":
-        return <Code className="mx-auto mb-6 text-blue-600" />;
+      case "App Development":
+        return <Smartphone className="mx-auto mb-6 text-blue-600" />;
+      case "SaaS Products":
+        return <ChartBarBig className="mx-auto mb-6 text-blue-600" />;
       case "Card Issuing Solution":
         return <BarChart2 className="mx-auto mb-6 text-blue-600" />;
       case "Crowdfunding Solutions":
@@ -43,13 +47,10 @@ const SolutionCard = ({ title, index }) => {
     >
       <div className="p-6 text-center">
         {/* Display icon based on title */}
-        {getIcon(title)}
-        <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
-        <p className="text-sm text-gray-500 mt-3">
-          Discover how this solution can help streamline your business
-          operations.
-        </p>
-        <button className="mt-6 px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-full shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:from-blue-600 hover:to-purple-600 focus:outline-none">
+        {getIcon(item?.title)}
+        <h3 className="text-xl font-semibold text-gray-800">{item?.title}</h3>
+        <p className="text-sm text-gray-500 mt-3">{item?.slug}</p>
+        <button className="mt-6 px-8 py-3 bg-black text-white font-semibold rounded-full shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:from-blue-600 hover:to-purple-600 focus:outline-none">
           Learn More
         </button>
       </div>
