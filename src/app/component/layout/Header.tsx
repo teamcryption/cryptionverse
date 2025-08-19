@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin, X } from "lucide-react";
 import Button from "../ui/Social";
 
 const Header = () => {
