@@ -17,7 +17,7 @@ import {
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";
-import { toast } from "@/components/ui/use-toast";
+
 import axios from "axios";
 
 /**
@@ -114,10 +114,9 @@ const Contact = () => {
         }
       );
       if (response?.status === 200) {
-        toast({
-          title: "Message Sent!",
-          description:
-            "Thank you for your inquiry. We'll get back to you within 24 hours.",
+        setStatus({
+          type: "success",
+          message: "Your message has been sent successfully.",
         });
         setForm({
           firstName: "",
@@ -129,11 +128,7 @@ const Contact = () => {
         });
       }
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "There was an issue submitting your message.",
-        variant: "destructive",
-      });
+      setStatus({ type: "error", message: "Something went wrong." });
     } finally {
       setSubmitting(false);
     }

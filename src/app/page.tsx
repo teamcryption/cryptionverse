@@ -5,8 +5,6 @@ import Footer from "./component/layout/Footer";
 import TrustedSection from "./component/layout/Trusted";
 import Solutions from "./component/layout/Solutions";
 import Contact from "./component/layout/Contact";
-import { useToast } from "@/components/ui/use-toast";
-import { Toast } from "@/components/ui/toast";
 
 function page() {
   return (
@@ -19,7 +17,6 @@ function page() {
       <Solutions />
       <Contact />
       <Footer />
-      <Toast />
     </div>
   );
 }
