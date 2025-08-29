@@ -6,11 +6,11 @@ import { CSSTransition } from "react-transition-group"; // Import CSSTransition
 const HeroSection = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState(""); // State for the text being typed
-  const textArray = ["builds", "Idiomgram", "Design"]; // Changeable words array
+  const textArray = ["builds", "Idiomgram", "Design"] as const; // Changeable words array
   const [email, setEmail] = useState(""); // State to store the email address
 
   // Array of Lottie animations corresponding to the text
-  const lottieAnimations = {
+  const lottieAnimations: Record<(typeof textArray)[number], any> = {
     builds: require("../../../../public/lottie/builds.json"), // Replace with correct paths
     Idiomgram: require("../../../../public/lottie/Idiomgram.json"),
     Design: require("../../../../public/lottie/Design.json"),
@@ -54,7 +54,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero-section bg-white py-20 mt-25">
+    <section className="hero-section bg-white py-20 pt-45 ">
       <div className="container mx-auto px-8 text-center md:text-left flex flex-col md:flex-row items-center">
         {/* Text Section */}
         <div className="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
