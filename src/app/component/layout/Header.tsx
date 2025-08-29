@@ -1,146 +1,353 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Button from "../ui/Social";
+
+type MenuItem = {
+  label: string;
+  href?: string;
+  children?: { label: string; href: string; desc?: string }[];
+};
+
+const NAV: MenuItem[] = [
+  {
+    label: "Products",
+    children: [
+      { label: "Wallet-as-a-Service", href: "/products/waas" },
+      { label: "On/Off Ramp", href: "/products/ramp" },
+      { label: "Compliance Suite", href: "/products/compliance" },
+    ],
+  },
+  {
+    label: "Services",
+    children: [
+      { label: "Consulting", href: "/services/consulting" },
+      { label: "Custom Integrations", href: "/services/integrations" },
+      { label: "Support & SLA", href: "/services/support" },
+    ],
+  },
+  { label: "Pricing", href: "/pricing" },
+  {
+    label: "Resources",
+    children: [
+      { label: "Docs", href: "/resources/docs" },
+      { label: "Blog", href: "/resources/blog" },
+      { label: "Case Studies", href: "/resources/case-studies" },
+    ],
+  },
+  { label: "About", href: "/about" },
+];
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const hoverTimers = useRef<Record<string, any>>({});
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
+  // shrink on scroll
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setScrolled(true); // Add 'scrolled' state if the page is scrolled
-      } else {
-        setScrolled(false); // Remove 'scrolled' state if at the top
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 0);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // close menus on route change (optional: if you wire a router event)
+  useEffect(() => {
+    const close = () => {
+      setOpenMenu(null);
+      setMobileOpen(false);
+    };
+    window.addEventListener("hashchange", close);
+    return () => window.removeEventListener("hashchange", close);
+  }, []);
+
+  const handleOpen = (key: string) => {
+    clearTimeout(hoverTimers.current[key]);
+    setOpenMenu(key);
+  };
+  const handleClose = (key: string) => {
+    hoverTimers.current[key] = setTimeout(() => {
+      setOpenMenu((cur) => (cur === key ? null : cur));
+    }, 120); // small delay to allow moving cursor
+  };
+
   return (
-    <header
-      className={`  fixed w-full top-0 left-0 z-50 transition-all ${
-        scrolled ? "py-2  rounded" : "py-4" // Reduce padding when scrolling
-      }`}
-    >
+    <header className="fixed inset-x-0 top-0 z-50">
+      {/* top spacer so content isn't hidden */}
+      <div className={`transition-all h-6`} />
+
+      {/* pill container */}
       <div
-        className={` mx-auto px-4 flex ${
-          scrolled
-            ? " transition-all justify-evenly align-center lg:py-2 sm:py-1  ease-in-out bg-gray-700 lg:rounded-full sm:rounded-20 lg:max-w-4xl"
-            : " transition-all justify-between  align-center ease-in-out max-w-7xl"
-        }  `}
+        className={[
+          "mx-auto flex h-20 items-center justify-around gap-3 px-4 transition-all",
+          "bg-white/95 shadow-lg ring-1 ring-black/5",
+          "backdrop-blur supports-[backdrop-filter]:bg-white/80",
+          "rounded-[999px]",
+          "py-3 max-w-4xl",
+        ].join(" ")}
       >
         {/* Logo */}
-        <div
-          className={`text-2xl font-bold text-black space-x-2 transition-all ${
-            scrolled ? "text-xl" : "text-2xl" // Reduce font size when scrolled
-          }`}
+        <Link
+          href="/"
+          aria-label="Home"
+          className="shrink-0 flex items-center gap-3"
         >
-          <Link href="/">
-            {scrolled ? (
-              <img src="/dark-logo.png" className="w-15 h-13" alt="Logo" />
-            ) : (
-              <img src="/card.png" className="w-15 h-13" alt="Logo" />
-            )}
-          </Link>
-        </div>
+          {/* Swap your assets as needed */}
+          <img
+            src="/Cryption verse for light bg.png"
+            alt="Cryption Verse Australia"
+            className="h-8 w-auto md:h-9"
+          />
+        </Link>
 
-        {/* Navigation Menu for Desktop */}
-        <nav className="hidden md:flex space-x-4 pt-4 space-y-4">
-          <Link
-            href="/"
-            className={` ${
-              scrolled ? "text-white" : "text-black"
-            } hover:text-black font-serif font-bold`}
-          >
-            Home
-          </Link>
-          <Link
-            href="/"
-            className={` ${
-              scrolled ? "text-white" : "text-black"
-            } hover:text-black font-serif font-bold`}
-          >
-            Products
-          </Link>
-          <Link
-            href="/"
-            className={` ${
-              scrolled ? "text-white" : "text-black"
-            } hover:text-black font-serif font-bold`}
-          >
-            About
-          </Link>
-          <Link
-            href="/"
-            className={` ${
-              scrolled ? "text-white" : "text-black"
-            } hover:text-black font-serif font-bold`}
-          >
-            Contact
-          </Link>
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-6">
+          {NAV.map((item) => {
+            const hasChildren = !!item.children?.length;
+            const key = item.label;
+
+            if (!hasChildren) {
+              return (
+                <Link
+                  key={key}
+                  href={item.href || "#"}
+                  className="text-[17px] font-medium text-slate-600 hover:text-slate-900"
+                >
+                  {item.label}
+                </Link>
+              );
+            }
+
+            return (
+              <div
+                key={key}
+                className="relative"
+                onMouseEnter={() => handleOpen(key)}
+                onMouseLeave={() => handleClose(key)}
+              >
+                <button
+                  type="button"
+                  aria-haspopup="menu"
+                  aria-expanded={openMenu === key}
+                  className="group inline-flex items-center gap-1.5 text-[17px] font-medium text-slate-600 hover:text-slate-900"
+                  onFocus={() => handleOpen(key)}
+                  onBlur={() => handleClose(key)}
+                >
+                  {item.label}
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    className={`transition-transform ${
+                      openMenu === key ? "rotate-180" : "rotate-0"
+                    } text-slate-500 group-hover:text-slate-700`}
+                    aria-hidden
+                  >
+                    <path
+                      d="M6 9l6 6 6-6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      fill="none"
+                    />
+                  </svg>
+                </button>
+
+                {/* Dropdown */}
+                <div
+                  role="menu"
+                  className={`absolute left-0 mt-3 w-64 rounded-2xl border border-slate-100 bg-white p-2 shadow-lg transition-all ${
+                    openMenu === key
+                      ? "pointer-events-auto opacity-100 translate-y-0"
+                      : "pointer-events-none opacity-0 -translate-y-1"
+                  }`}
+                >
+                  <ul className="divide-y divide-slate-100/70">
+                    {item.children!.map((c) => (
+                      <li key={c.href}>
+                        <Link
+                          href={c.href}
+                          className="block rounded-xl px-3 py-3 hover:bg-slate-50"
+                        >
+                          <div className="text-sm font-semibold text-slate-800">
+                            {c.label}
+                          </div>
+                          {c.desc ? (
+                            <div className="mt-0.5 text-xs text-slate-500">
+                              {c.desc}
+                            </div>
+                          ) : null}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          })}
         </nav>
 
-        {/* Right-side Social Icons */}
-        <div className="flex space-x-4">
-          <Button />
-        </div>
-
-        {/* Mobile Hamburger Menu */}
-        <div className="md:hidden mt-4">
-          <button
-            onClick={toggleMenu}
-            className={`${
-              scrolled ? "text-white" : "text-black"
-            }  focus:outline-none`}
+        {/* CTA */}
+        <div className="hidden md:block">
+          <Link
+            href="/book-a-call"
+            className={[
+              "inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-white text-[16px] font-semibold",
+              "bg-gradient-to-r from-[#6a00ff] via-[#c042f5] to-[#ff7a18]",
+              "shadow hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500",
+            ].join(" ")}
           >
+            Book a call
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="w-8 h-8"
+              aria-hidden
+              className="translate-x-0 transition-transform group-hover:translate-x-0.5"
             >
               <path
+                d="M5 12h14M13 5l7 7-7 7"
+                stroke="currentColor"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
+                fill="none"
               />
             </svg>
-          </button>
+          </Link>
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-700 hover:bg-slate-100"
+          aria-label="Open menu"
+          onClick={() => setMobileOpen((v) => !v)}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden>
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
       </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg">
-          <nav className="flex flex-col items-center space-y-4 py-4">
-            <Link href="/" className="text-black hover:text-blue-500">
-              Home
+      {/* Mobile sheet */}
+      <div
+        className={[
+          "md:hidden px-4 transition-[max-height,opacity] overflow-hidden",
+          mobileOpen ? "max-h-[70vh] opacity-100" : "max-h-0 opacity-0",
+        ].join(" ")}
+      >
+        <div className="mx-auto mt-3 w-full max-w-5xl rounded-3xl border border-slate-200 bg-white p-4 shadow-lg">
+          <ul className="space-y-2">
+            {NAV.map((item) => {
+              const hasChildren = !!item.children?.length;
+              if (!hasChildren) {
+                return (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href || "#"}
+                      className="block rounded-xl px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              }
+              return (
+                <MobileAccordion
+                  key={item.label}
+                  label={item.label}
+                  items={item.children!}
+                />
+              );
+            })}
+          </ul>
+
+          <div className="mt-3">
+            <Link
+              href="/book-a-call"
+              onClick={() => setMobileOpen(false)}
+              className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#6a00ff] via-[#c042f5] to-[#ff7a18] px-5 py-3 text-base font-semibold text-white"
+            >
+              Book a call
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
+                <path
+                  d="M5 12h14M13 5l7 7-7 7"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              </svg>
             </Link>
-            <Link href="/products" className="text-black hover:text-blue-500">
-              Products
-            </Link>
-            <Link href="/about" className="text-black hover:text-blue-500">
-              About
-            </Link>
-            <Link href="/contact" className="text-black hover:text-blue-500">
-              Contact
-            </Link>
-          </nav>
+          </div>
         </div>
-      )}
+      </div>
     </header>
+  );
+};
+
+const MobileAccordion = ({
+  label,
+  items,
+}: {
+  label: string;
+  items: { label: string; href: string }[];
+}) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <li className="rounded-xl">
+      <button
+        className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-base font-medium text-slate-700 hover:bg-slate-50"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+      >
+        <span>{label}</span>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          className={`transition-transform ${open ? "rotate-180" : ""}`}
+          aria-hidden
+        >
+          <path
+            d="M6 9l6 6 6-6"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </svg>
+      </button>
+      <div
+        className={[
+          "overflow-hidden pl-2",
+          "transition-[max-height,opacity] duration-200",
+          open ? "max-h-80 opacity-100" : "max-h-0 opacity-0",
+        ].join(" ")}
+      >
+        <ul className="mb-2 ml-1 space-y-1 border-l border-slate-200 pl-3">
+          {items.map((it) => (
+            <li key={it.href}>
+              <Link
+                href={it.href}
+                className="block rounded-lg px-2 py-2 text-sm text-slate-700 hover:bg-slate-50"
+              >
+                {it.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </li>
   );
 };
 
