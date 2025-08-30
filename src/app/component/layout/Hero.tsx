@@ -118,6 +118,9 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+      <div className="container pt-12 mx-auto px-8 ">
+        <img src={"/images/Content.png"} alt="Content" />
+      </div>
     </section>
   );
 };

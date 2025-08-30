@@ -1,127 +1,80 @@
 "use client";
+import Image from "next/image";
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.css"; // Make sure to import the swiper styles
 
-const TrustedSection = () => {
+/**
+ * Screenshot-style logo strip:
+ * - Continuous RTL auto-slide
+ * - Pause on hover
+ * - Even spacing, clean white background
+ * - Mobile → fewer logos visible; desktop → all visible
+ *
+ * Swap the src paths to your own assets.
+ */
+const logos = [
+  { src: "/pertner/apple.png", alt: "Apple" },
+  { src: "/pertner/spotify.png", alt: "Spotify" },
+  { src: "/pertner/slack.png", alt: "Slack" },
+  { src: "/pertner/brand-asset-management.png", alt: "Dropbox" },
+  { src: "/pertner/communication.png", alt: "Webflow" },
+  { src: "/pertner/google.png", alt: "Zoom" },
+];
+
+// Helper: duplicate once for seamless loop
+const loopLogos = [...logos, ...logos];
+
+export default function TrustedSection() {
   return (
-    <section className="trusted-section py-20 bg-gray-50">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl text-gray-400 font-semibold mb-6">
-          Partners Who Achieved{" "}
-          <span className="text-purple-600">Business</span> Success with Our
-          <br />
-          Custom Solutions
-        </h2>
-        <p className="text-lg mb-10 text-gray-600">
-          Trusted by Industry Leaders
-        </p>
+    <section className="bg-white">
+      <div className=" container mx-auto w-full">
+        {/* Hover group to pause animation */}
+        <div className="group relative overflow-hidden py-10">
+          {/* Faded edges (optional, remove if you want hard edges) */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent" />
 
-        <Swiper
-          spaceBetween={20} // Space between slides
-          slidesPerView={6} // Number of slides to show at once
-          loop={true} // Enable infinite looping
-          autoplay={{
-            delay: 1000, // Auto-slide every 2 seconds
-            disableOnInteraction: false, // Continue autoplay after interaction
-          }}
-          breakpoints={{
-            640: { slidesPerView: 2 }, // 2 slides on small screens
-            768: { slidesPerView: 3 }, // 3 slides on medium screens
-            1024: { slidesPerView: 7 }, // 4 slides on large screens
-          }}
-          className="swiper-container"
-        >
-          <SwiperSlide>
-            <img
-              src="/pertner/apple.png"
-              alt="Statepay"
-              className="w-full max-w-[60px]"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="/pertner/google.png"
-              alt="Fastpay"
-              className="w-full max-w-[60px]"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="/pertner/brand-asset-management.png"
-              alt="Sumer"
-              className="w-full max-w-[60px]"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="/pertner/communication.png"
-              alt="MePayer"
-              className="w-full max-w-[60px]"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="/pertner/logo.png"
-              alt="Crypto Invest Hub"
-              className="w-full max-w-[60px]"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="/pertner/slack.png"
-              alt="Digit"
-              className="w-full max-w-[60px]"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="pertner/spotify.png"
-              alt="Tether.ba"
-              className="w-full max-w-[60px]"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="/pertner/brand-asset-management.png"
-              alt="Sumer"
-              className="w-full max-w-[60px]"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="/pertner/communication.png"
-              alt="MePayer"
-              className="w-full max-w-[60px]"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="/pertner/logo.png"
-              alt="Crypto Invest Hub"
-              className="w-full max-w-[60px]"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="/pertner/slack.png"
-              alt="Digit"
-              className="w-full max-w-[60px]"
-            />
-          </SwiperSlide>
-        </Swiper>
-
-        <p className="mt-10">
-          <a
-            href="/get-started"
-            className="bg-purple-600 text-white font-semibold px-8 py-3 rounded-full hover:bg-purple-700 transition-colors"
-          >
-            Get Started Today
-          </a>
-        </p>
+          {/* Marquee track */}
+          <div className="marquee will-change-transform">
+            <ul className="flex items-center gap-16 md:gap-24">
+              {loopLogos.map((logo, i) => (
+                <li key={i} className="shrink-0">
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    width={300}
+                    height={300}
+                    className="h-8 w-20 md:h-20"
+                    priority={i < 6} // first set gets priority for instant paint
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
+
+      {/* Local CSS for animation */}
+      <style jsx>{`
+        /* Adjust speed by changing 28s; longer = slower */
+        .marquee {
+          display: inline-block;
+          min-width: max-content;
+          animation: slide-left 28s linear infinite;
+        }
+        /* Pause on hover of the whole strip */
+        .group:hover .marquee {
+          animation-play-state: paused;
+        }
+        /* Make the loop seamless by translating exactly half the width (we rendered the content twice) */
+        @keyframes slide-left {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </section>
   );
-};
-
-export default TrustedSection;
+}

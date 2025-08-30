@@ -5,6 +5,8 @@ import Footer from "./component/layout/Footer";
 import TrustedSection from "./component/layout/Trusted";
 import Solutions from "./component/layout/Solutions";
 import Contact from "./component/layout/Contact";
+import TestimonialsSection from "./component/layout/Testimonials";
+import Creativity from "./component/layout/Creativity";
 
 function page() {
   return (
@@ -13,7 +15,9 @@ function page() {
         <Header />
         <Hero />
       </div>
-      {/* <TrustedSection /> */}
+      <TrustedSection />
+      <TestimonialsSection />
+      <Creativity />
       <Solutions />
       <Contact />
       <Footer />
