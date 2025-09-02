@@ -89,13 +89,13 @@ const ResourcesItems = [
 const HeroSection = () => {
   return (
     <section
-      className="relative min-h-screen bg-cover bg-center z-0 py-20"
+      className="relative min-h-screen bg-cover bg-center z-0 "
       style={{
         backgroundImage: "url('/hero/hero.png')", // Set the background image from uploaded file
       }}
     >
       <div className="absolute inset-0 z-0  bg-black opacity-0" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-0">
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-left text-white z-0">
         <h1 className="text-4xl md:text-[96px] font-semibold font-['roboto'] mb-[58px] ">
           Ideas to impact <br />
           We cover it all
@@ -157,13 +157,13 @@ const Logo = ({ scrolled }: any) => {
     <div className="flex items-center gap-2">
       {scrolled ? (
         <img
-          src="/Cryption verse for light bg.png"
+          src="/logo white bg.svg"
           alt="Cryption Verse Australia"
           className="h-10 w-auto md:h-[43px] mb-[10px]"
         />
       ) : (
         <img
-          src="/Cryption verse for dark bg.png"
+          src="/logo Black bg.svg"
           alt="Cryption Verse Australia"
           className="h-10 w-auto md:h-[43px] mb-[10px]"
         />

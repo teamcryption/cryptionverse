@@ -70,7 +70,7 @@ const HeroSection = () => {
 
   return (
     <section className="hero-section bg-white pb-10 ">
-      <div className="container mx-auto px-8 text-center md:text-left flex flex-col md:flex-row items-center">
+      <div className="container mx-auto text-center md:text-left flex flex-col md:flex-row items-center">
         {/* Text Section */}
         <div className="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
           <h1 className="text-5xl md:text-[45px] font-[900] font-['roboto'] mb-[28px] text-black">

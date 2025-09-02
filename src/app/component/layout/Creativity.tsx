@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Creativity = () => {
   return (
-    <section className="bg-white text-black py-20 px-6">
+    <section className="container mx-auto bg-white text-black py-20 ">
       <div className=" container flex justify-between  mx-auto text-center mb-16">
         <h2 className="text-5xl font-['Manrope'] font-semibold mb-4 text-left">
           Where creativity meets
@@ -16,7 +16,7 @@ const Creativity = () => {
           <ArrowUp size={25} style={{ transform: "rotate(45deg)" }} />
         </button>
       </div>
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px]">
+      <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px]">
         {/* Card 1 */}
         <div className="bg-transparent w-[384px] h-[464px] rounded-xl p-6">
           <div className="w-[384px] h-[384px] relative mb-4">
