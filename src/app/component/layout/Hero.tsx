@@ -2,16 +2,25 @@
 import React, { useState, useEffect } from "react";
 import Lottie from "lottie-react";
 import { CSSTransition } from "react-transition-group"; // Import CSSTransition
+import {
+  ArrowUp,
+  Code,
+  Code2,
+  GitGraphIcon,
+  Lightbulb,
+  Palette,
+} from "lucide-react";
 
 const HeroSection = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState(""); // State for the text being typed
+  const [animationKey, setAnimationKey] = useState("builds"); // Initial animation key
   const textArray = ["builds", "Idiomgram", "Design"] as const; // Changeable words array
   const [email, setEmail] = useState(""); // State to store the email address
 
   // Array of Lottie animations corresponding to the text
   const lottieAnimations: Record<(typeof textArray)[number], any> = {
-    builds: require("../../../../public/lottie/builds.json"), // Replace with correct paths
+    builds: require("../../../../public/lottie/builds.json"),
     Idiomgram: require("../../../../public/lottie/Idiomgram.json"),
     Design: require("../../../../public/lottie/Design.json"),
   };
@@ -53,63 +62,98 @@ const HeroSection = () => {
     console.log("Email submitted:", email);
   };
 
+  const handleButtonClick = (animationName: string) => {
+    setAnimationKey(animationName);
+  };
+
   return (
-    <section className="hero-section bg-white py-20 pt-45 ">
+    <section className="hero-section bg-white pb-10 ">
       <div className="container mx-auto px-8 text-center md:text-left flex flex-col md:flex-row items-center">
         {/* Text Section */}
         <div className="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
-          <h1 className="text-6xl font-bold mb-4 text-black">
-            Decrypt ideas.
-            <br /> Encrypt{" "}
-            <CSSTransition
-              in={true}
-              timeout={1000} // Time for fade-in/fade-out transition
-              classNames="fade"
-              key={displayedText}
-            >
-              <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#6a00ff] via-[#c042f5] to-[#ff7a18]">
-                {displayedText}
-              </span>
-            </CSSTransition>
-            .
+          <h1 className="text-5xl md:text-[45px] font-[900] font-['roboto'] mb-4 text-black">
+            We turn abstract ideas into
+            <br /> tangible, high-impact <br />
+            realities for{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500">
+              Company{" "}
+            </span>
           </h1>
-          <p className="text-lg mb-8 text-black">
-            Research → Strategy → UI/UX → Code. <br /> One unified team, from
-            spark to shipped.
+          <p className="text-[16px] mb-8 text-[#697586]">
+            A focused product squad for discovery → design → delivery.
+            <br />
+            Clear communication, fast iterations.
           </p>
           <form
             onSubmit={handleSubmit}
             className="flex justify-center md:justify-start gap-4"
           >
-            <input
-              type="email"
-              placeholder="Add your email address"
-              value={email}
-              onChange={handleEmailChange}
-              className="px-6 py-2 rounded-full text-black w-60 md:w-72"
-              required
-            />
-            <button
-              type="submit"
-              className="bg-black text-white font-semibold px-6 py-4 rounded-se-lg rounded-ee-lg"
-            >
-              Get Started for Free
+            <button className="flex items-center gap-2 rounded-lg  bg-black px-4 py-4 font-semibold text-white transition-colors hover:border-indigo-600 hover:bg-gray-600 hover:text-white">
+              <span>Schedule a call</span>
+              <ArrowUp style={{ transform: "rotate(45deg)" }} />
             </button>
           </form>
+
+          {/* Button to change animation */}
+          <div className="mt-8 flex justify-start gap-4">
+            <button
+              onClick={() => handleButtonClick("Idiomgram")}
+              className={` w-[187px] h-[138px] py-2 px-6  ${
+                animationKey === "Idiomgram"
+                  ? "bg-black text-white "
+                  : "bg-black text-white"
+              } text-left  rounded-[16px]`}
+            >
+              <div className="flex items-center gap-2">
+                <Lightbulb color="white" size={30} />
+                <span className="font-[700] text-[16px]">Ideation</span>
+              </div>
+              <p className="text-[12px]  line-height-[19px]  font-[400] text-white font-['SF Pro] mt-2">
+                Discover the opportunity and shape the value proposition with
+                fast discovery sprints.
+              </p>
+            </button>
+            <button
+              onClick={() => handleButtonClick("Design")}
+              className=" w-[187px] h-[138px] py-2 px-6 bg-black text-left text-white rounded-[16px]"
+            >
+              <div className="flex items-center gap-2">
+                <Palette color="white" size={30} />
+                <span className="font-[700] text-[16px]">Design</span>
+              </div>
+              <p className="text-[12px]  line-height-[19px]  font-[400] text-white font-['SF Pro'] mt-2">
+                Discover the opportunity and shape the value proposition with
+                fast discovery sprints.
+              </p>
+            </button>
+            <button
+              onClick={() => handleButtonClick("builds")}
+              className=" w-[187px] h-[138px] py-2 px-6 bg-black text-left text-white rounded-[16px]"
+            >
+              <div className="flex items-center gap-2">
+                <Code2 color="white" size={30} />
+                <span className="font-[700] text-[16px]">Development</span>
+              </div>
+              <p className="text-[12px] line-height-[19px] font-[400] text-white font-['SF Pro'] mt-2">
+                Ship reliable software with CI/CD, quality gates, and
+                observability build-in.
+              </p>
+            </button>
+          </div>
         </div>
 
         {/* Image Section with Lottie Animation */}
         <div className="md:w-1/2 flex justify-center">
-          <div className="w-100 h-100 max-w-[400px] md:max-w-[600px]">
+          <div className="w-full h-full max-w-[400px] md:max-w-[600px]">
             {/* Lottie Animation with fade transition */}
             <CSSTransition
               in={true}
               timeout={2000} // Time for fade-in/fade-out transition
               classNames="fade"
-              key={textIndex} // Change animation based on the textIndex
+              key={animationKey} // Change animation based on the animationKey
             >
               <Lottie
-                animationData={lottieAnimations[textArray[textIndex]]}
+                animationData={lottieAnimations[animationKey]}
                 loop={true}
                 autoplay={true}
                 className="w-full h-full"
@@ -118,9 +162,9 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <div className="container pt-12 mx-auto px-8 ">
+      {/* <div className="container pt-12 mx-auto px-8 ">
         <img src={"/images/Content.png"} alt="Content" />
-      </div>
+      </div> */}
     </section>
   );
 };

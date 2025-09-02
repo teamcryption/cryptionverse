@@ -89,20 +89,20 @@ const ResourcesItems = [
 const HeroSection = () => {
   return (
     <section
-      className="relative min-h-screen bg-cover bg-center"
+      className="relative min-h-screen bg-cover bg-center z-0"
       style={{
         backgroundImage: "url('/hero/hero.png')", // Set the background image from uploaded file
       }}
     >
-      <div className="absolute inset-0 z-0 bg-black opacity-0" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10">
+      <div className="absolute inset-0 z-0  bg-black opacity-0" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-0">
         <h1 className="text-4xl md:text-[96px] font-semibold font-['roboto'] ">
           Ideas to impact
         </h1>
         <p className="text-lg md:text-[96px] font-semibold font-['roboto'] mb-6">
           We cover it all
         </p>
-        <button className="flex items-center gap-2 rounded-lg  bg-white px-4 py-3 font-semibold text-black transition-colors hover:border-indigo-600 hover:bg-indigo-600 hover:text-black">
+        <button className=" mb-30 flex items-center gap-2 rounded-lg  bg-transparent border-2 border-white px-4 py-2 font-semibold text-white transition-colors  hover:bg-white hover:text-black">
           <span>Schedule a call</span>
           <ArrowUp style={{ transform: "rotate(45deg)" }} />
         </button>
@@ -125,26 +125,26 @@ const FlyoutNav = () => {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 250 ? true : false);
+    setScrolled(latest > 80 ? true : false);
   });
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full px-6 ${
-        scrolled ? "text-white" : "text-white"
+      className={`fixed  top-0 z-50 w-full mx-auto  ${
+        scrolled ? "text-black" : "text-white"
       }
-      transition-all duration-300 ease-out lg:px-12
+      transition-all duration-300 ease-out lg:px-20
       ${
         scrolled
-          ? "bg-neutral-950 py-3 shadow-xl"
+          ? "bg-white py-3 shadow-xl"
           : "bg-neutral-950/0 py-6 shadow-none"
       }`}
     >
-      <div className=" flex max-w-7xl items-center justify-between">
+      <div className=" flex  items-center justify-between">
         <Logo />
-        <div className="hidden gap-6 lg:flex">
+        <div className="hidden gap-6 lg:flex z-100">
           <Links scrolled={scrolled} />
-          <CTAs />
+          <CTAs scrolled={scrolled} />
         </div>
         <MobileMenu />
       </div>
@@ -242,14 +242,18 @@ const NavLink = ({ scrolled, children, href, FlyoutContent }: any) => {
   );
 };
 
-const CTAs = () => {
+const CTAs = ({ scrolled }: any) => {
   return (
     <div className="flex items-center gap-3">
       {/* <button className="flex items-center gap-2 rounded-lg border-2 border-white px-4 py-2 font-semibold text-black transition-colors hover:bg-white hover:text-black">
         <FaUserCircle />
         <span>Sign in</span>
       </button> */}
-      <button className=" flex items-center gap-2 rounded-lg bg-white px-4 py-3 font-semibold text-black transition-colors hover:border-indigo-600 hover:bg-indigo-600 hover:text-black">
+      <button
+        className={`flex items-center gap-2 rounded-lg ${
+          scrolled ? "bg-black text-white" : "bg-white text-black"
+        } px-4 py-2 font-semibold  transition-colors hover:border-indigo-600 hover:bg-indigo-600 hover:text-black`}
+      >
         <span>Book a call</span>{" "}
         <ArrowUp style={{ transform: "rotate(45deg)" }} />
       </button>
@@ -261,7 +265,7 @@ const ProductsContent = () => {
   return (
     <div className="grid bg-[#FFFFFF] rounded-md border border-neutral-200  w-full grid-cols-12 shadow-xl lg:h-auto lg:w-[600px] lg:shadow-none xl:w-[750px]">
       <div className="grid grid-cols-2   lg:col-span-12 lg:grid-cols-2">
-        <div className="col-span-12 grid grid-cols-1 sm:w-full grid-rows-1 gap-3 bg-white p-2 lg:col-span-8">
+        <div className="col-span-12 grid grid-cols-2 grid-rows-1 gap-3 bg-white p-2 lg:col-span-8">
           {ProductItems.slice(0, 4).map((item, index) => (
             <a
               key={index}
