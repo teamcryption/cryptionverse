@@ -14,7 +14,8 @@ import {
 const HeroSection = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState(""); // State for the text being typed
-  const [animationKey, setAnimationKey] = useState("builds"); // Initial animation key
+  const [animationKey, setAnimationKey] =
+    useState<(typeof textArray)[number]>("builds"); // Initial animation key
   const textArray = ["builds", "Idiomgram", "Design"] as const; // Changeable words array
   const [email, setEmail] = useState(""); // State to store the email address
 
@@ -62,11 +63,9 @@ const HeroSection = () => {
     console.log("Email submitted:", email);
   };
 
-  const handleButtonClick = (animationName: string) => {
+  const handleButtonClick = (animationName: any) => {
     setAnimationKey(animationName);
   };
-
-  console.log(animationKey);
 
   return (
     <section className="hero-section bg-white pb-10 ">
