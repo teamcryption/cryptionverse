@@ -4,14 +4,14 @@ import Image from "next/image";
 
 const Creativity = () => {
   return (
-    <section className="bg-black text-white py-20 px-6">
+    <section className="bg-white text-black py-20 px-6">
       <div className=" container flex justify-between  mx-auto text-center mb-16">
-        <h2 className="text-5xl font-[Manrope] font-semibold mb-4">
+        <h2 className="text-5xl font-['Manrope'] font-semibold mb-4 text-left">
           Where creativity meets
           <br />
           success in our work
         </h2>
-        <button className=" w-[150px] h-[50px] bg-white text-black rounded-lg font=[Poppins] flex items-center justify-center">
+        <button className=" w-[150px] h-[50px] bg-black text-white rounded-lg font=[Poppins] flex items-center justify-center">
           <span> our Customers</span>
           <ArrowUp size={25} style={{ transform: "rotate(45deg)" }} />
         </button>

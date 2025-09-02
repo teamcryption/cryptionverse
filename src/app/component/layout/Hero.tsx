@@ -6,6 +6,7 @@ import {
   ArrowUp,
   Code,
   Code2,
+  CodeIcon,
   GitGraphIcon,
   Lightbulb,
   Palette,
@@ -15,7 +16,7 @@ const HeroSection = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState(""); // State for the text being typed
   const [animationKey, setAnimationKey] =
-    useState<(typeof textArray)[number]>("builds"); // Initial animation key
+    useState<(typeof textArray)[number]>("Idiomgram"); // Initial animation key
   const textArray = ["builds", "Idiomgram", "Design"] as const; // Changeable words array
   const [email, setEmail] = useState(""); // State to store the email address
 
@@ -72,7 +73,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-8 text-center md:text-left flex flex-col md:flex-row items-center">
         {/* Text Section */}
         <div className="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
-          <h1 className="text-5xl md:text-[45px] font-[900] font-['roboto'] mb-4 text-black">
+          <h1 className="text-5xl md:text-[45px] font-[900] font-['roboto'] mb-[28px] text-black">
             We turn abstract ideas into
             <br /> tangible, high-impact <br />
             realities for{" "}
@@ -89,9 +90,9 @@ const HeroSection = () => {
             onSubmit={handleSubmit}
             className="flex justify-center md:justify-start gap-4"
           >
-            <button className="flex items-center gap-2 rounded-lg  bg-black px-4 py-4 font-semibold text-white transition-colors hover:border-indigo-600 hover:bg-gray-600 hover:text-white">
+            <button className="w-[207px] h-[60px] flex items-center justify-center gap-2 rounded-lg  bg-black px-4 py-4 font-semibold text-white transition-colors hover:border-indigo-600 hover:bg-gray-600 hover:text-white font-[16px] font-[800]">
               <span>Schedule a call</span>
-              <ArrowUp style={{ transform: "rotate(45deg)" }} />
+              <ArrowUp size={28} style={{ transform: "rotate(45deg)" }} />
             </button>
           </form>
 
@@ -105,10 +106,10 @@ const HeroSection = () => {
                   : "bg-white text-black"
               }`}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-start gap-2">
                 <Lightbulb
                   color={animationKey === "Idiomgram" ? "white" : "black"}
-                  size={30}
+                  size={24}
                 />
                 <span className="font-[700] text-[16px]">Ideation</span>
               </div>
@@ -126,10 +127,10 @@ const HeroSection = () => {
                   : "bg-white text-black"
               }`}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-start gap-2">
                 <Palette
                   color={animationKey === "Design" ? "white" : "black"}
-                  size={30}
+                  size={24}
                 />
                 <span className="font-[700] text-[16px]">Design</span>
               </div>
@@ -147,10 +148,10 @@ const HeroSection = () => {
                   : "bg-white text-black"
               }`}
             >
-              <div className="flex items-center gap-2">
-                <Code2
+              <div className="flex items-start gap-2">
+                <CodeIcon
                   color={animationKey === "builds" ? "white" : "black"}
-                  size={30}
+                  size={35}
                 />
                 <span className="font-[700] text-[16px]">Development</span>
               </div>

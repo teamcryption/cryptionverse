@@ -1,122 +1,101 @@
 "use client";
+
 import React from "react";
-import Button from "../ui/Social";
-import { MapPin, PhoneCall } from "lucide-react";
 
-const Footer = () => {
+export default function DarkFooter() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="bg-gray-50 py-12 text-gray-700 container mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 px-6">
-        {/* Left Section */}
-        <div className="lg:text-center md:text-left sm:text-left">
-          <h3 className="text-2xl font-bold text-black-700 mb-4">
-            <img src="/card.png" className="w-15 h-13" alt="Logo" />
-          </h3>
-          <p className="text-sm text-gray-600 mb-4">
-            Cryption Verse is a secure and reliable platform for all your
-            encryption needs.
+    <footer className="w-full bg-[#0B0D10] text-[#C6CBD3]">
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        {/* Brand */}
+        <div className="flex flex-col items-center gap-6">
+          <div className="flex items-center gap-3 select-none">
+            {/* Minimal chain/arrow logo to match the feel of the screenshot */}
+            {/* <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#0E1116] ring-1 ring-white/10">
+              <svg viewBox="0 0 80 80" className="w-10 h-10" aria-hidden="true">
+                <g
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity="0.9"
+                >
+                  <path d="M18 40a14 14 0 0 1 14-14h10" />
+                  <path d="M62 40a14 14 0 0 1-14 14H38" />
+                  <path d="M32 40h16" />
+                </g>
+                <path d="M58 18l12 7-12 7z" fill="#17B7D7" />
+              </svg>
+            </span>
+            <div className="leading-tight">
+              <div className="tracking-[0.08em] text-white font-semibold text-[15px]">
+                CRYPTION VERSE
+              </div>
+              <div className="tracking-[0.4em] text-xs text-white/70">
+                AUSTRALIA
+              </div>
+            </div> */}
+
+            <img
+              src="/Cryption verse for dark bg.png"
+              className="h-10 w-auto md:h-12 mb-[10px]"
+              alt="Cryption Verse Australia"
+            />
+          </div>
+
+          {/* Primary nav */}
+          <nav className="mt-2">
+            <ul className="flex flex-wrap items-center gap-8 text-sm text-[#A5ACB8]">
+              {[
+                "Overview",
+                "Features",
+                "Pricing",
+                "Careers",
+                "Help",
+                "Privacy",
+              ].map((item) => (
+                <li key={item}>
+                  <a
+                    href="#"
+                    className="hover:text-white transition-colors duration-150"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        {/* Divider */}
+        <div className="mt-10 border-t border-white/10" />
+
+        {/* Bottom bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 pt-6">
+          <p className="text-sm text-[#9AA2AE]">
+            © {year} Cryption Verse. All rights reserved.
           </p>
-          {/* Social media icons */}
-          <div className="mt-6 float-left">
-            <Button />
-          </div>
-        </div>
 
-        {/* Center Section - Links */}
-        <div className="lg:text-center md:text-left sm:text-left">
-          <h3 className="text-xl font-semibold text-black-700 mb-4">
-            Quick Links
-          </h3>
-          <div className="flex flex-wrap lg:justify-center md:justify-start space-x-8">
-            <ul className="text-sm space-y-2">
-              <li>
+          <ul className="flex items-center gap-8 text-sm text-[#A5ACB8]">
+            {[
+              { label: "Terms", href: "#" },
+              { label: "Privacy", href: "#" },
+              { label: "Cookies", href: "#" },
+            ].map((link) => (
+              <li key={link.label}>
                 <a
-                  href="/"
-                  className="text-gray-600 hover:text-black transition-colors duration-200"
+                  href={link.href}
+                  className="hover:text-white transition-colors duration-150"
                 >
-                  Home
+                  {link.label}
                 </a>
               </li>
-              <li>
-                <a
-                  href="/about"
-                  className="text-gray-600 hover:text-black transition-colors duration-200"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/contact"
-                  className="text-gray-600 hover:text-black transition-colors duration-200"
-                >
-                  Contact
-                </a>
-              </li>
-            </ul>
-            <ul className="text-sm space-y-2">
-              <li>
-                <a
-                  href="/privacy"
-                  className="text-gray-600 hover:text-black transition-colors duration-200"
-                >
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/terms"
-                  className="text-gray-600 hover:text-black transition-colors duration-200"
-                >
-                  Terms of Service
-                </a>
-              </li>
-            </ul>
-          </div>
+            ))}
+          </ul>
         </div>
-
-        {/* Right Section - Location & Contact */}
-        <div className="lg:text-center md:text-left sm:text-left float-left">
-          <h3 className="text-xl font-semibold text-black-700 mb-4">
-            Our Locations
-          </h3>
-          <div className="flex lg:flex-row flex-col lg:items-center md:items-start space-x-6 gap-8">
-            <div className="space-y-4 ">
-              <div className="flex lg:items-center space-x-2 lg:justify-center md:justify-start">
-                <MapPin className="text-black" />
-                <p className="text-sm text-gray-600">Bangladesh</p>
-              </div>
-              <p className="text-sm text-gray-600">Dhaka, Bangladesh 1229</p>
-              <div className="flex lg:items-center space-x-2 lg:justify-center md:justify-start">
-                <PhoneCall className="text-black" />
-                <p className="font-primary text-dark-1 hover:text-primary font-medium transition-colors">
-                  +61 430 052 221
-                </p>
-              </div>
-            </div>
-            <div className="space-y-4 ">
-              <div className="flex lg:items-center space-x-2 lg:justify-center md:justify-start">
-                <MapPin className="text-black" />
-                <p className="text-sm text-gray-600">Australia</p>
-              </div>
-              <p className="text-sm text-gray-600">Melbourne, Australia 3022</p>
-              <div className="flex lg:items-center space-x-2 lg:justify-center md:justify-start">
-                <PhoneCall className="text-black" />
-                <p className="text-sm text-gray-600">+61 430 052 221</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Section - Copyright */}
-      <div className="text-center mt-12">
-        <p className="text-sm text-gray-600">
-          &copy; {new Date().getFullYear()} Cryption Verse. All rights reserved.
-        </p>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

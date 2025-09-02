@@ -89,7 +89,7 @@ const ResourcesItems = [
 const HeroSection = () => {
   return (
     <section
-      className="relative min-h-screen bg-cover bg-center z-0"
+      className="relative min-h-screen bg-cover bg-center z-0 py-20"
       style={{
         backgroundImage: "url('/hero/hero.png')", // Set the background image from uploaded file
       }}
@@ -102,7 +102,7 @@ const HeroSection = () => {
         <p className="text-lg md:text-[96px] font-semibold font-['roboto'] mb-6">
           We cover it all
         </p>
-        <button className=" mb-30 flex items-center gap-2 rounded-lg  bg-transparent border-2 border-white px-4 py-2 font-semibold text-white transition-colors  hover:bg-white hover:text-black">
+        <button className=" font-[16px] mb-30 flex items-center justify-center gap-2 rounded-lg  bg-transparent border-2 border-white px-4 py-2 font-semibold text-white transition-colors  hover:bg-white hover:text-black w-[195px] h-[52px]">
           <span>Schedule a call</span>
           <ArrowUp style={{ transform: "rotate(45deg)" }} />
         </button>
@@ -141,8 +141,8 @@ const FlyoutNav = () => {
       }`}
     >
       <div className=" flex  items-center justify-between">
-        <Logo />
-        <div className="hidden gap-6 lg:flex z-100">
+        <Logo scrolled={scrolled} />
+        <div className="hidden lg:flex z-100 gap-20 ">
           <Links scrolled={scrolled} />
           <CTAs scrolled={scrolled} />
         </div>
@@ -152,15 +152,24 @@ const FlyoutNav = () => {
   );
 };
 
-const Logo = ({ color = "white" }) => {
+const Logo = ({ scrolled }: any) => {
   // Temp logo from https://logoipsum.com/
   return (
     <div className="flex items-center gap-2">
-      <img
-        src="/Cryption verse for light bg.png"
-        alt="Cryption Verse Australia"
-        className="h-10 w-auto md:h-12 mb-[10px]"
-      />
+      {scrolled ? (
+        <img
+          src="/Cryption verse for light bg.png"
+          alt="Cryption Verse Australia"
+          className="h-10 w-auto md:h-[43px] mb-[10px]"
+        />
+      ) : (
+        <img
+          src="/Cryption verse for dark bg.png"
+          alt="Cryption Verse Australia"
+          className="h-10 w-auto md:h-[43px] mb-[10px]"
+        />
+      )}
+
       {/* <span className="text-2xl font-bold" style={{ color }}>
         Placeholder
       </span>
@@ -211,15 +220,15 @@ const NavLink = ({ scrolled, children, href, FlyoutContent }: any) => {
     <div
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
-      className="relative h-fit w-fit"
+      className="relative h-fit w-fit "
     >
-      <a href={href} className="relative">
+      <a href={href} className="relative text-[16px] font-['Inter']">
         {children}
         <span
           style={{
             transform: showFlyout ? "scaleX(1)" : "scaleX(0)",
           }}
-          className="absolute -bottom-2 -left-2 -right-2 h-1 origin-left scale-x-0 rounded-full bg-indigo-300 transition-transform duration-300 ease-out"
+          className="absolute  bottom-2 -left-2 -right-2 h-1 origin-left scale-x-0 rounded-full bg-indigo-300 transition-transform duration-300 ease-out"
         />
       </a>
       <AnimatePresence>
@@ -244,15 +253,15 @@ const NavLink = ({ scrolled, children, href, FlyoutContent }: any) => {
 
 const CTAs = ({ scrolled }: any) => {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-4 ">
       {/* <button className="flex items-center gap-2 rounded-lg border-2 border-white px-4 py-2 font-semibold text-black transition-colors hover:bg-white hover:text-black">
         <FaUserCircle />
         <span>Sign in</span>
       </button> */}
       <button
-        className={`flex items-center gap-2 rounded-lg ${
+        className={`flex items-center justify-center gap-2 rounded-lg w-[195px] h-[52px] ${
           scrolled ? "bg-black text-white" : "bg-white text-black"
-        } px-4 py-2 font-semibold  transition-colors hover:border-indigo-600 hover:bg-indigo-600 hover:text-black`}
+        } px-4 py-2 font-semibold  font-[16px] transition-colors hover:border-indigo-600 hover:bg-black hover:text-white`}
       >
         <span>Book a call</span>{" "}
         <ArrowUp style={{ transform: "rotate(45deg)" }} />

@@ -12,6 +12,7 @@ import BrandIdentity from "./component/layout/BrandIdentity";
 import AwardSection from "./component/layout/AwardSection";
 import TeamCarousel from "./component/layout/TeamSection";
 import PricingComponent from "./component/layout/PricingSection";
+import FAQ from "./component/layout/Faq";
 
 function page() {
   return (
@@ -22,14 +23,16 @@ function page() {
         <Hero />
       </div>
       <TrustedSection />
-      <TestimonialsSection />
       <Creativity />
+      <TestimonialsSection />
+
       <BrandIdentity />
       <AwardSection />
       <TeamCarousel />
       <PricingComponent />
-      <Solutions />
-      <Contact />
+      <FAQ />
+      {/* <Solutions /> */}
+      {/* <Contact /> */}
       <Footer />
     </div>
   );

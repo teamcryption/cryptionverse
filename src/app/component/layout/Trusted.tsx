@@ -12,12 +12,12 @@ import React from "react";
  * Swap the src paths to your own assets.
  */
 const logos = [
-  { src: "/pertner/apple.png", alt: "Apple" },
-  { src: "/pertner/spotify.png", alt: "Spotify" },
-  { src: "/pertner/slack.png", alt: "Slack" },
-  { src: "/pertner/brand-asset-management.png", alt: "Dropbox" },
-  { src: "/pertner/communication.png", alt: "Webflow" },
-  { src: "/pertner/google.png", alt: "Zoom" },
+  { src: "/pertner/coinbase.png", alt: "Apple" },
+  { src: "/pertner/Company logo.png", alt: "Spotify" },
+
+  { src: "/pertner/dropbox.png", alt: "Dropbox" },
+  { src: "/pertner/webflow.png", alt: "Webflow" },
+  { src: "/pertner/zoom.png", alt: "Zoom" },
 ];
 
 // Helper: duplicate once for seamless loop
@@ -41,9 +41,9 @@ export default function TrustedSection() {
                   <Image
                     src={logo.src}
                     alt={logo.alt}
-                    width={300}
-                    height={300}
-                    className="h-8 w-20 md:h-20"
+                    width={200}
+                    height={0}
+                    className="h-auto w-[117px] "
                     priority={i < 6} // first set gets priority for instant paint
                   />
                 </li>
