@@ -135,7 +135,7 @@ const FlyoutNav = () => {
       transition-all duration-300 ease-out lg:px-20
       ${
         scrolled
-          ? "bg-white py-3 shadow-xl"
+          ? "bg-white py-3 shadow-sm"
           : "bg-neutral-950/0 py-6 shadow-none"
       }`}
     >
