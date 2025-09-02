@@ -7,17 +7,27 @@ import Solutions from "./component/layout/Solutions";
 import Contact from "./component/layout/Contact";
 import TestimonialsSection from "./component/layout/Testimonials";
 import Creativity from "./component/layout/Creativity";
+import Example from "./component/layout/Header2";
+import BrandIdentity from "./component/layout/BrandIdentity";
+import AwardSection from "./component/layout/AwardSection";
+import TeamCarousel from "./component/layout/TeamSection";
+import PricingComponent from "./component/layout/PricingSection";
 
 function page() {
   return (
     <div className="bg-white">
       <div className=" bg-white">
-        <Header />
+        {/* <Header /> */}
+        <Example />
         <Hero />
       </div>
       <TrustedSection />
       <TestimonialsSection />
       <Creativity />
+      <BrandIdentity />
+      <AwardSection />
+      <TeamCarousel />
+      <PricingComponent />
       <Solutions />
       <Contact />
       <Footer />
