@@ -25,32 +25,32 @@ const HeroSection = () => {
     Design: require("../../../../public/lottie/Design.json"),
   };
 
-  useEffect(() => {
-    let typingTimer: NodeJS.Timeout;
-    let currentText = ""; // To accumulate the typed text
-    let currentWordIndex = 0;
+  // useEffect(() => {
+  //   let typingTimer: NodeJS.Timeout;
+  //   let currentText = ""; // To accumulate the typed text
+  //   let currentWordIndex = 0;
 
-    const typeText = () => {
-      if (currentWordIndex < textArray[textIndex].length) {
-        currentText += textArray[textIndex].charAt(currentWordIndex);
-        setDisplayedText(currentText);
-        currentWordIndex++;
-      } else {
-        clearInterval(typingTimer);
-        setTimeout(() => {
-          setTextIndex((prevIndex) => (prevIndex + 1) % textArray.length);
-          currentText = ""; // Reset the text for the next word
-          currentWordIndex = 0;
-        }, 3000); // Wait for 1 second before changing the word
-      }
-    };
+  //   const typeText = () => {
+  //     if (currentWordIndex < textArray[textIndex].length) {
+  //       currentText += textArray[textIndex].charAt(currentWordIndex);
+  //       setDisplayedText(currentText);
+  //       currentWordIndex++;
+  //     } else {
+  //       clearInterval(typingTimer);
+  //       setTimeout(() => {
+  //         setTextIndex((prevIndex) => (prevIndex + 1) % textArray.length);
+  //         currentText = ""; // Reset the text for the next word
+  //         currentWordIndex = 0;
+  //       }, 3000); // Wait for 1 second before changing the word
+  //     }
+  //   };
 
-    typingTimer = setInterval(typeText, 100); // Typing speed set to 100ms per character
+  //   typingTimer = setInterval(typeText, 100); // Typing speed set to 100ms per character
 
-    return () => {
-      clearInterval(typingTimer);
-    };
-  }, [textIndex]);
+  //   return () => {
+  //     clearInterval(typingTimer);
+  //   };
+  // }, [textIndex]);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -65,6 +65,8 @@ const HeroSection = () => {
   const handleButtonClick = (animationName: string) => {
     setAnimationKey(animationName);
   };
+
+  console.log(animationKey);
 
   return (
     <section className="hero-section bg-white pb-10 ">
@@ -98,43 +100,62 @@ const HeroSection = () => {
           <div className="mt-8 flex justify-start gap-4">
             <button
               onClick={() => handleButtonClick("Idiomgram")}
-              className={` w-[187px] h-[138px] py-2 px-6  ${
+              className={`w-[187px] h-[138px] border-1 border-gray-200 py-2 px-6 text-left rounded-[16px] ${
                 animationKey === "Idiomgram"
-                  ? "bg-black text-white "
-                  : "bg-black text-white"
-              } text-left  rounded-[16px]`}
+                  ? "bg-black text-white"
+                  : "bg-white text-black"
+              }`}
             >
               <div className="flex items-center gap-2">
-                <Lightbulb color="white" size={30} />
+                <Lightbulb
+                  color={animationKey === "Idiomgram" ? "white" : "black"}
+                  size={30}
+                />
                 <span className="font-[700] text-[16px]">Ideation</span>
               </div>
-              <p className="text-[12px]  line-height-[19px]  font-[400] text-white font-['SF Pro] mt-2">
+              <p className="text-[12px] line-height-[19px] font-[400]  font-['SF Pro'] mt-2">
                 Discover the opportunity and shape the value proposition with
                 fast discovery sprints.
               </p>
             </button>
+
             <button
               onClick={() => handleButtonClick("Design")}
-              className=" w-[187px] h-[138px] py-2 px-6 bg-black text-left text-white rounded-[16px]"
+              className={`w-[187px] h-[138px] border-1 border-gray-200 py-2 px-6 text-left rounded-[16px] ${
+                animationKey === "Design"
+                  ? "bg-black text-white"
+                  : "bg-white text-black"
+              }`}
             >
               <div className="flex items-center gap-2">
-                <Palette color="white" size={30} />
+                <Palette
+                  color={animationKey === "Design" ? "white" : "black"}
+                  size={30}
+                />
                 <span className="font-[700] text-[16px]">Design</span>
               </div>
-              <p className="text-[12px]  line-height-[19px]  font-[400] text-white font-['SF Pro'] mt-2">
+              <p className="text-[12px] line-height-[19px] font-[400]  font-['SF Pro'] mt-2">
                 Discover the opportunity and shape the value proposition with
                 fast discovery sprints.
               </p>
             </button>
+
             <button
               onClick={() => handleButtonClick("builds")}
-              className=" w-[187px] h-[138px] py-2 px-6 bg-black text-left text-white rounded-[16px]"
+              className={`w-[187px] h-[138px] border-1 border-gray-200 py-2 px-6 text-left rounded-[16px] ${
+                animationKey === "builds"
+                  ? "bg-black text-white"
+                  : "bg-white text-black"
+              }`}
             >
               <div className="flex items-center gap-2">
-                <Code2 color="white" size={30} />
+                <Code2
+                  color={animationKey === "builds" ? "white" : "black"}
+                  size={30}
+                />
                 <span className="font-[700] text-[16px]">Development</span>
               </div>
-              <p className="text-[12px] line-height-[19px] font-[400] text-white font-['SF Pro'] mt-2">
+              <p className="text-[12px] line-height-[19px] font-[400]  font-['SF Pro'] mt-2">
                 Ship reliable software with CI/CD, quality gates, and
                 observability build-in.
               </p>
@@ -144,7 +165,7 @@ const HeroSection = () => {
 
         {/* Image Section with Lottie Animation */}
         <div className="md:w-1/2 flex justify-center">
-          <div className="w-full h-full max-w-[400px] md:max-w-[600px]">
+          <div className="w-[400px] h-[400px] max-w-[400px] md:max-w-[600px]">
             {/* Lottie Animation with fade transition */}
             <CSSTransition
               in={true}
