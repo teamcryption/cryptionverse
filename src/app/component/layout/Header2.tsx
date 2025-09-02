@@ -96,12 +96,11 @@ const HeroSection = () => {
     >
       <div className="absolute inset-0 z-0  bg-black opacity-0" />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-0">
-        <h1 className="text-4xl md:text-[96px] font-semibold font-['roboto'] ">
-          Ideas to impact
-        </h1>
-        <p className="text-lg md:text-[96px] font-semibold font-['roboto'] mb-6">
+        <h1 className="text-4xl md:text-[96px] font-semibold font-['roboto'] mb-[58px] ">
+          Ideas to impact <br />
           We cover it all
-        </p>
+        </h1>
+
         <button className=" font-[16px] mb-30 flex items-center justify-center gap-2 rounded-lg  bg-transparent border-2 border-white px-4 py-2 font-semibold text-white transition-colors  hover:bg-white hover:text-black w-[195px] h-[52px]">
           <span>Schedule a call</span>
           <ArrowUp style={{ transform: "rotate(45deg)" }} />
