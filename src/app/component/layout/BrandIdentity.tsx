@@ -125,7 +125,7 @@ const BrandIdentity = () => {
       </div>
       <div className="  bg-[#000000] h-[828px] flex flex-col items-center justify-center">
         <div className="container mx-auto px-4">
-          <h1 className=" text-[82px] text-left w-full font-[800] text-black font-['manrope'] mb-4">
+          <h1 className=" text-[82px] text-left w-full font-[800] text-white font-['manrope'] mb-4">
             Webflow
           </h1>
           <div className=" w-full  bg-white rounded-lg shadow-xl flex flex-col lg:flex-row items-center justify-between">
