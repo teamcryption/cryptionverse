@@ -22,9 +22,9 @@ const HeroSection = () => {
 
   // Array of Lottie animations corresponding to the text
   const lottieAnimations: Record<(typeof textArray)[number], any> = {
-    builds: require("../../../../public/lottie/builds.json"),
-    Idiomgram: require("../../../../public/lottie/Idiomgram.json"),
-    Design: require("../../../../public/lottie/Design.json"),
+    builds: require("../../../../public/lottie/web design (1).json"),
+    Idiomgram: require("../../../../public/lottie/Ai loading model.json"),
+    Design: require("../../../../public/lottie/HTML Web Development.json"),
   };
 
   // useEffect(() => {

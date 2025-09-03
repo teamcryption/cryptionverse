@@ -24,7 +24,7 @@ function page() {
       </div>
       <TrustedSection />
       <Creativity />
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
 
       <BrandIdentity />
       <AwardSection />
